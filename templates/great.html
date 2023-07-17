@@ -1,0 +1,13 @@
+{% extends "skeliton.html" %}
+{% block title %}Great {{name}}{% endblock %}
+{% block head %}
+    {{ super() }}
+    <meta name="author" content="Raj Singh" >
+    <meta name="discription" content="page for user profile" >
+{% endblock %}
+{% block body %}
+    <h1> Hello {{ name }}!</h1>
+    {% for b in lis %}
+        {{b}}
+    {% endfor %}
+{% endblock  %}

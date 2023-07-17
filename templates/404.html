@@ -1,0 +1,18 @@
+{% extends "skeliton.html" %}
+{% block title %}error:404 Page not found{{name}}{% endblock %}
+{% block head %}
+    {{ super() }}
+    <meta name="author" content="Raj Singh" >
+    <meta name="discription" content="page for user profile" >
+    <link rel="stylesheet" href="{{url_for('static',filename='css/error.css',_external=True)}}">
+{% endblock %}
+{% block body %}
+    <figure>
+        <img src="{{url_for('static',filename='svg/404.svg',_external=True)}}" alt="error:404 image">
+    </figure>
+    <section>
+        <h3>Sorry for that.The requested URL was not found on Server</h3>
+        <a href="{{url_for('index',_external=True)}}" id="a1">Go Home</a>
+        <a href="{{url_for('index',_external=True)}}" id="a2">Send Feedback</a>
+    </section>
+{% endblock  %}
