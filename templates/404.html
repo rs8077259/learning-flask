@@ -13,6 +13,6 @@
     <section>
         <h3>Sorry for that.The requested URL was not found on Server</h3>
         <a href="{{url_for('index',_external=True)}}" id="a1">Go Home</a>
-        <a href="{{url_for('index',_external=True)}}" id="a2">Send Feedback</a>
+        <a href="{{url_for('feedback',error_=1,_external=True)}}" id="a2">Send Feedback</a>
     </section>
 {% endblock  %}

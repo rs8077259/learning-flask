@@ -6,6 +6,7 @@
     <meta name="discription" content="page for user profile" >
 {% endblock %}
 {% block body %}
+    {{super()}}
     <h1> Hello {{ name }}!</h1>
     {% for b in lis %}
         {{b}}

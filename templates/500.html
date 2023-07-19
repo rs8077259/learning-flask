@@ -1,9 +1,9 @@
 {% extends "skeliton.html" %}
-{% block title %}Great {{name}}{% endblock %}
+{% block title %}error:500{% endblock %}
 {% block head %}
     {{ super() }}
     <meta name="author" content="Raj Singh" >
-    <meta name="discription" content="page for user profile" >
+    <meta name="discription" content="this page will handel error:500" >
     <link rel="stylesheet" href="{{url_for('static',filename='css/error.css',_external=True)}}">
 {% endblock %}
 {% block body %}
@@ -13,6 +13,6 @@
     <section>
         <h3>Look like Something went wrong with the Server</h3>
         <a href="{{url_for('index',_external=True)}}" id="a1">Go Home</a>
-        <a href="{{url_for('index',_external=True)}}" id="a2">Send Feedback</a>
+        <a href="{{url_for('feedback',error_=0,_external=True)}}" id="a2">Send Feedback</a>
     </section>
 {% endblock  %}
