@@ -1,0 +1,25 @@
+{% extends "skeliton.html" %}
+{% block title %}Home{% endblock %}
+{% block head %}
+    {{ super() }}
+    <meta name="author" content="Raj Singh" >
+    <meta name="discription" content="page for user profile" >
+    <link rel="stylesheet" href="{{url_for('static',_external=True,filename='css/home.css')}}">
+{% endblock %}
+{% block body %}
+    <header class="header el">
+        <h2>header</h2>
+        <nav>
+            <ul>
+                <li><a href="">home </a></li>
+                <li><a href=""> upload </a></li>
+                <li><a href="{{url_for('sign_in',_external=True)}}"> signin </a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    </main>
+    <aside class="el"><h2>aside</h2></aside>
+    <footer class="el"><h2>footer</h2></footer>
+{% endblock  %}

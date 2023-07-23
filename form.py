@@ -16,4 +16,7 @@ class SignUp(FlaskForm):
     submit=form.SubmitField("Sign up")
 
 
-
+class SignIN(FlaskForm):
+    email=form.EmailField("Email",validators=[DataRequired()])
+    password=form.PasswordField('Password:',validators=[DataRequired()])
+    submit=form.SubmitField('signin')

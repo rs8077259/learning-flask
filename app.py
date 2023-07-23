@@ -1,8 +1,9 @@
-from flask import Flask,request,render_template,redirect,url_for,abort,session,flash
+from flask import Flask,request,render_template,redirect,url_for,abort,session,flash,jsonify
 from form import *
 import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail,Message
+from threading import Thread
 app=Flask(__name__)
 app.config["SECRET_KEY"]="dihdhdkshdkhskjdhksjhdjks"#os.environ.get("SECRETKEY")
 app.config["SQLALCHEMY_DATABASE_URI"]=os.environ.get("POSTGRESQL")
@@ -28,10 +29,14 @@ class User(db.Model):
         if not (self.query.filter_by(email=uemail).first()):
             return False
         return True
+    def check(self):
+        if not (self.query.filter_by(email=self.email,password=self.password).first()):
+            return False
+        return True
 @app.route('/')
 def index():
-    return "restarting python"
-@app.route("/user/<name>")
+    return render_template("home.html")
+@app.route("/user/profile/<name>")
 def user(name):
     return render_template("great.html",name=name,lis=[1,2,3,4,54,5,6,6,343,7,7,7,43])
 @app.route("/user/feedback/<error_>")
@@ -59,6 +64,40 @@ def sign_up():
             else:
                 flash("provided email account alredy Exist")
     return render_template("signup.html",form=signup)
+
+"""
+
+def send_async_mail(app,msg):
+    with app.app_context():
+        mail.send(msg)
+
+def send_mail(to,subject,template,**kwergs):
+    msg=Message(subject,sender=app.config['MAIL_USERNAME'],recipients=[to])
+    msg.html=render_template(template+".html",**kwergs)
+    thr=Thread(target=send_async_mail,args=[app,msg])
+    thr.start()
+    return thr """
+@app.route('/user/signin',methods=['POST',"GET"])
+def sign_in():
+    if request.method=='POST':
+        try:
+            data=request.get_json()
+            print(data)
+        except Exception as E:
+            print(E)
+            error_response={
+                'status':'error'
+            }
+            return error_response
+        auth=User()
+        auth.email=data['email']
+        auth.password=data['password']
+        response_data={"message":auth.check(),'url':url_for('sign_up',_external=True)}
+        return jsonify(response_data)
+    else: 
+        signin=SignIN()
+        return render_template('signin.html',form=signin)
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html"),404
