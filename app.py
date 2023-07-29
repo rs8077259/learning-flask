@@ -53,12 +53,12 @@ def sign_up():
                 username=signup.email.data[:(signup.email.data).find("@")]
                 user=User(name=username,email=signup.email.data,password=signup.password.data)
                 db.session.add(user)
-                #db.session.commit()
+                db.session.commit()
                 session["Username"]=username
                 msg=Message('noreply',sender=app.config['MAIL_USERNAME'],recipients=[signup.email.data])
                 msg.body="your are registered succesfully to website"
                 msg.html="<h3>%s</h3>"%username
-                #mail.send(msg)
+                mail.send(msg)
                 flash("Registered Successfully")
                 return redirect(url_for('user',name=username))
             else:
